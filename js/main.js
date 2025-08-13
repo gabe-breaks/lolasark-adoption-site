@@ -36,7 +36,7 @@ const renderPets = pets => {
       pet.description?.trim() || 'No description available.'
 
     // Set age
-    clone.querySelector('.cat-gallery__age').textContent = getRandomAgeText()
+    clone.querySelector('.cat-gallery__age').textContent = getCatAgeCategory()
 
     // Set image
     const img = clone.querySelector('.cat-gallery__card-image img')
@@ -67,7 +67,14 @@ FILTER_BUTTONS.forEach(btn => btn.addEventListener('click', handleFilterClick))
 
 fetchData()
 
-const getRandomAgeText = () => {
+const getCatAgeCategory = () => {
   const age = Math.random() * (12 - 0.6) + 0.6
-  return age < 1 ? 'less than one year' : Math.floor(age) + ' years old'
+
+  if (age < 1) {
+    return 'Kitten 🐣'
+  } else if (age <= 7) {
+    return 'Adult 😺'
+  } else {
+    return 'Senior 🐾'
+  }
 }
