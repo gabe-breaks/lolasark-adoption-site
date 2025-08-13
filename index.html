@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO & Accessibility -->
+    <meta
+      name="description"
+      content="Lola's Ark - Cat Rescue. Discover rescued cats and help them find loving homes. Join our community and make a difference today."
+    />
+    <meta property="og:title" content="Lola's Ark - Second Chances for Cats" />
+    <meta
+      property="og:description"
+      content="Meet rescued cats and help them find loving homes."
+    />
+    <meta property="og:image" content="https://example.com/preview.jpg" />
+    <meta property="og:type" content="website" />
+
+    <title>Lola's Ark - Second Chances for Cats</title>
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="./css/main.css" />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <header class="hero">
+      <div class="container">
+        <i class="fa-solid fa-cat hero__logo" aria-hidden="true"></i>
+        <h1 class="hero__title">Lola's Ark</h1>
+        <p class="hero__subtitle">
+          Where every rescued cat finds a loving home.<br />
+          Discover sweet, furry friends waiting to bring warmth and joy into
+          your life.
+        </p>
+        <div class="hero__actions">
+          <a href="#meet-our-cats-bookmark" class="button button--primary"
+            >Meet Our Cats</a
+          >
+          <a href="/donate" class="button button--secondary">Make a Donation</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" class="container">
+      <section class="feature-list">
+        <article class="feature-card">
+          <i
+            class="fa-solid fa-heart feature-card__icon"
+            aria-hidden="true"
+          ></i>
+          <h2 class="feature-card__title">Compassionate Care</h2>
+          <p>
+            Every cat is treated with love and the best possible care while
+            waiting for a new home.
+          </p>
+        </article>
+        <article class="feature-card">
+          <i class="fa-solid fa-paw feature-card__icon" aria-hidden="true"></i>
+          <h2 class="feature-card__title">Adoption Support</h2>
+          <p>
+            We help you find the perfect match and provide guidance every step
+            of the way.
+          </p>
+        </article>
+        <article class="feature-card">
+          <i
+            class="fa-solid fa-seedling feature-card__icon"
+            aria-hidden="true"
+          ></i>
+          <h2 class="feature-card__title">Community Outreach</h2>
+          <p>
+            Our mission goes beyond rescue — we educate and support responsible
+            pet ownership.
+          </p>
+        </article>
+      </section>
+
+      <p class="intro-text">
+        At Lola's Ark, we rescue, care for, and rehome cats of all ages, giving
+        every animal a second chance at a happy life. With the help of our
+        volunteers and supporters, we provide love, medical care, and
+        socialisation to prepare cats for their forever homes. Join us in
+        supporting our furry friends and building a kinder, more compassionate
+        community.
+      </p>
+
+      <section id="meet-our-cats-bookmark" class="cat-gallery">
+        <h2 class="cat-gallery__header">Meet Our Cats</h2>
+        <div
+          class="cat-gallery__filter"
+          role="tablist"
+          aria-label="Pet Filters"
+        >
+          <button
+            role="tab"
+            aria-selected="true"
+            data-filter="all"
+            tabindex="0"
+          >
+            All Pets
+          </button>
+          <button
+            role="tab"
+            aria-selected="false"
+            data-filter="cat"
+            tabindex="-1"
+          >
+            Cats
+          </button>
+          <button
+            role="tab"
+            aria-selected="false"
+            data-filter="dog"
+            tabindex="-1"
+          >
+            Dogs
+          </button>
+        </div>
+        <div class="cat-gallery__list"></div>
+        <template id="cat-gallery__card-template">
+          <div class="cat-gallery__card">
+            <div class="cat-gallery__card-image">
+              <img src="" alt="Rescue cat" loading="lazy" />
+            </div>
+            <div class="cat-gallery__card-text">
+              <h3 class="cat-gallery__title"></h3>
+              <p class="cat-gallery__description"></p>
+              <p class="cat-gallery__age"></p>
+            </div>
+          </div>
+        </template>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <nav aria-label="Footer">
+        <p>&copy; 2025 Lola's Ark. All rights reserved.</p>
+      </nav>
+    </footer>
+
+    <script src="./js/main.js"></script>
+  </body>
+</html>
