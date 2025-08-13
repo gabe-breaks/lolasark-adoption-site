@@ -1,80 +1,103 @@
-const TEMPLATE = document.querySelector('#cat-gallery__card-template')
-const GALLERY_LIST = document.querySelector('.cat-gallery__list')
-const FILTER_BUTTONS = document.querySelectorAll('.cat-gallery__filter button')
+// ================================
+// PETS APP JS
+// ================================
 
-const getCatAgeCategory = () => {
-  const age = Math.random() * (12 - 0.6) + 0.6
+// DOM Elements
+const petContainer = document.querySelector('.cat-gallery__list')
+const filterButtons = document.querySelectorAll('.filter-btn')
+const template = document.getElementById('cat-gallery__card-template')
 
-  if (age < 1) {
-    return 'Kitten 🐣'
-  } else if (age <= 7) {
-    return 'Adult 😺'
-  } else {
-    return 'Senior 🐾'
-  }
-}
-
-if (!TEMPLATE || !GALLERY_LIST) {
-  console.error('Required DOM elements not found.')
-}
-
+// Store all pets globally
 let allPets = []
 
-const fetchData = async () => {
-  const URL = 'https://learnwebcode.github.io/bootcamp-pet-data/pets.json'
+// --------------------------------
+// Helper: Get age category with emoji
+// --------------------------------
+const getAgeCategory = birthyear => {
+  const currentYear = new Date().getFullYear()
+  const yearNum = Number(birthyear)
+  console.log(yearNum)
+  if (isNaN(yearNum) || !birthyear) return 'Unknown'
+  const age = currentYear - yearNum
+  if (age < 1) return 'Kitten 🐣'
+  if (age <= 7) return 'Adult 😺'
+  return 'Senior 🐾'
+}
+
+// --------------------------------
+// Render pets to DOM using template
+// --------------------------------
+const displayPets = pets => {
+  petContainer.innerHTML = ''
+  if (!pets.length) {
+    petContainer.innerHTML = '<p>No pets found.</p>'
+    return
+  }
+
+  console.log(pets)
+  pets.forEach(pet => {
+    console.log(pet)
+    const clone = template.content.cloneNode(true)
+    clone.querySelector('img').src =
+      pet.photo && pet.photo.trim() !== '' ? pet.photo : './img/fallback.jpg'
+
+    clone.querySelector('img').alt = pet.name
+    clone.querySelector('.cat-gallery__title').textContent = pet.name
+    clone.querySelector('.cat-gallery__description').textContent =
+      pet.description || ''
+    clone.querySelector('.cat-gallery__age').textContent = getAgeCategory(
+      pet.birthYear
+    )
+    petContainer.appendChild(clone)
+  })
+}
+
+// --------------------------------
+// Fetch pets JSON
+// --------------------------------
+const fetchPets = async () => {
   try {
-    const res = await fetch(URL)
-    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`)
-    allPets = await res.json()
-    renderPets(allPets)
-  } catch (error) {
-    console.error('Failed to fetch data:', error)
-    GALLERY_LIST.innerHTML = '<p>Unable to load pets at this time.</p>'
+    const res = await fetch(
+      'https://learnwebcode.github.io/bootcamp-pet-data/pets.json'
+    )
+    const data = await res.json()
+    allPets = data
+    console.log(allPets)
+    displayPets(allPets)
+  } catch (err) {
+    console.error('Error loading pets:', err)
+    petContainer.innerHTML = '<p>Failed to load pets.</p>'
   }
 }
 
-const renderPets = pets => {
-  const fragment = document.createDocumentFragment()
+// --------------------------------
+// Filter pets by age category
+// --------------------------------
+const filterPets = filter => {
+  if (filter.toLowerCase() === 'all') {
+    displayPets(allPets)
+    return
+  }
 
-  pets.forEach(pet => {
-    const clone = TEMPLATE.content.cloneNode(true)
-
-    // Set name
-    clone.querySelector('.cat-gallery__title').textContent =
-      pet.name?.trim() || 'Unnamed Pet'
-
-    // Set description
-    clone.querySelector('.cat-gallery__description').textContent =
-      pet.description?.trim() || 'No description available.'
-
-    // Set age
-    clone.querySelector('.cat-gallery__age').textContent = getCatAgeCategory()
-
-    // Set image
-    const img = clone.querySelector('.cat-gallery__card-image img')
-    img.src = pet.photo?.trim() || 'img/fallback.jpg'
-    img.alt = `${pet.name || 'Unknown'} the ${pet.species || 'creature'}`
-    img.loading = 'lazy'
-
-    fragment.appendChild(clone)
+  const filtered = allPets.filter(pet => {
+    const category = getAgeCategory(pet.birthYear).toLowerCase()
+    return category.startsWith(filter.toLowerCase())
   })
 
-  GALLERY_LIST.replaceChildren(fragment)
+  displayPets(filtered)
 }
 
-const handleFilterClick = e => {
-  const btn = e.currentTarget
-  const filter = btn.dataset.filter?.trim().toLowerCase() || 'all'
+// --------------------------------
+// Setup filter buttons
+// --------------------------------
+filterButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const filter = btn.dataset.filter
+    filterPets(filter)
+  })
+})
 
-  if (filter === 'all') {
-    renderPets(allPets)
-  } else {
-    renderPets(
-      allPets.filter(pet => pet.species?.trim().toLowerCase() === filter)
-    )
-  }
-}
-
-FILTER_BUTTONS.forEach(btn => btn.addEventListener('click', handleFilterClick))
-
-fetchData()
+// --------------------------------
+// Initialize app
+// --------------------------------
+fetchPets()
