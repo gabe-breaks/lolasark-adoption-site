@@ -6,35 +6,39 @@ if (!TEMPLATE || !GALLERY_LIST) {
   console.error('Required DOM elements not found.')
 }
 
-let allPets = [] // store fetched data globally
+let allPets = []
 
-// Fetch and store pet data
 const fetchData = async () => {
   const URL = 'https://learnwebcode.github.io/bootcamp-pet-data/pets.json'
   try {
     const res = await fetch(URL)
     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`)
     allPets = await res.json()
-    renderPets(allPets) // initially render all
+    renderPets(allPets)
   } catch (error) {
     console.error('Failed to fetch data:', error)
     GALLERY_LIST.innerHTML = '<p>Unable to load pets at this time.</p>'
   }
 }
 
-// Render given pets
 const renderPets = pets => {
   const fragment = document.createDocumentFragment()
 
   pets.forEach(pet => {
     const clone = TEMPLATE.content.cloneNode(true)
 
+    // Set name
     clone.querySelector('.cat-gallery__title').textContent =
       pet.name?.trim() || 'Unnamed Pet'
 
+    // Set description
     clone.querySelector('.cat-gallery__description').textContent =
       pet.description?.trim() || 'No description available.'
 
+    // Set age
+    clone.querySelector('.cat-gallery__age').textContent = getRandomAgeText()
+
+    // Set image
     const img = clone.querySelector('.cat-gallery__card-image img')
     img.src = pet.photo?.trim() || 'img/fallback.jpg'
     img.alt = `${pet.name || 'Unknown'} the ${pet.species || 'creature'}`
@@ -43,17 +47,12 @@ const renderPets = pets => {
     fragment.appendChild(clone)
   })
 
-  // Replace children for efficiency
   GALLERY_LIST.replaceChildren(fragment)
 }
 
-// Filter click handler
 const handleFilterClick = e => {
   const btn = e.currentTarget
   const filter = btn.dataset.filter?.trim().toLowerCase() || 'all'
-
-  // update aria-pressed states
-  FILTER_BUTTONS.forEach(b => b.setAttribute('aria-pressed', b === btn))
 
   if (filter === 'all') {
     renderPets(allPets)
@@ -64,7 +63,11 @@ const handleFilterClick = e => {
   }
 }
 
-// Attach event listeners
 FILTER_BUTTONS.forEach(btn => btn.addEventListener('click', handleFilterClick))
 
 fetchData()
+
+const getRandomAgeText = () => {
+  const age = Math.random() * (12 - 0.6) + 0.6
+  return age < 1 ? 'less than one year' : Math.floor(age) + ' years old'
+}
