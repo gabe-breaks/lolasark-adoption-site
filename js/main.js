@@ -2,6 +2,18 @@ const TEMPLATE = document.querySelector('#cat-gallery__card-template')
 const GALLERY_LIST = document.querySelector('.cat-gallery__list')
 const FILTER_BUTTONS = document.querySelectorAll('.cat-gallery__filter button')
 
+const getCatAgeCategory = () => {
+  const age = Math.random() * (12 - 0.6) + 0.6
+
+  if (age < 1) {
+    return 'Kitten 🐣'
+  } else if (age <= 7) {
+    return 'Adult 😺'
+  } else {
+    return 'Senior 🐾'
+  }
+}
+
 if (!TEMPLATE || !GALLERY_LIST) {
   console.error('Required DOM elements not found.')
 }
@@ -66,15 +78,3 @@ const handleFilterClick = e => {
 FILTER_BUTTONS.forEach(btn => btn.addEventListener('click', handleFilterClick))
 
 fetchData()
-
-const getCatAgeCategory = () => {
-  const age = Math.random() * (12 - 0.6) + 0.6
-
-  if (age < 1) {
-    return 'Kitten 🐣'
-  } else if (age <= 7) {
-    return 'Adult 😺'
-  } else {
-    return 'Senior 🐾'
-  }
-}
