@@ -223,9 +223,12 @@ function setupFilterButtons () {
 
 // Function to handle adoption
 function adoptCat (catName) {
-  alert(
-    `Brilliant! You're interested in ${catName}! Give us a ring or drop us an email to arrange a meet and greet.`
-  )
+  // Find the section you want to scroll to
+  const section = document.getElementById('contact')
+
+  if (section) {
+    section.scrollIntoView({ behavior: 'smooth' })
+  }
 }
 
 // Mobile Nav Toggle
