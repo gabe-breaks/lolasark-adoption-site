@@ -1,121 +1,228 @@
 <!DOCTYPE html>
-<html lang="en-GB">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <meta
-      name="description"
-      content="Lola's Ark - Cat Rescue. Discover rescued cats and help them find loving homes. Join our community and make a difference today."
-    />
-    <meta property="og:title" content="Lola's Ark - Second Chances for Cats" />
-    <meta
-      property="og:description"
-      content="Meet rescued cats and help them find loving homes."
-    />
-    <meta property="og:image" content="https://example.com/preview.jpg" />
-    <meta property="og:type" content="website" />
-
-    <title>Lola's Ark - Second Chances for Cats</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Roboto:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <link rel="stylesheet" href="./css/main.css" />
-  </head>
-  <body>
-    <!-- Removed skip link -->
-
-    <header class="hero">
-      <div class="container">
-        <i class="fa-solid fa-cat hero__logo" aria-hidden="true"></i>
-        <h1 class="hero__title">Lola's Ark</h1>
-        <p class="hero__subtitle">
-          Where every rescued cat finds a loving home.<br />
-          Discover sweet, furry friends waiting to bring warmth and joy into
-          your life.
-        </p>
-        <div class="hero__actions">
-          <a href="#meet-our-cats-bookmark" class="button button--primary"
-            >Meet Our Cats</a
-          >
-          <a href="/donate" class="button button--secondary">Make a Donation</a>
-        </div>
-      </div>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lola's Ark - Cat Adoption Charity</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="./styles.css">
+    <!-- Meta tags for social sharing -->
+    <meta property="og:title" content="Lola's Ark - Find Your Perfect Cat Companion">
+    <meta property="og:description" content="Looking for a furry friend? We've got amazing cats waiting for their forever homes. Every adoption makes a huge difference!">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Cat adoption charity helping cats find loving homes. Browse available cats for adoption and learn about our rescue mission.">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <i class="fas fa-paw"></i>
+                <span>Lola's Ark</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About Us</a></li>
+                <li><a href="#cats" class="nav-link">Adopt a Cat</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
     </header>
 
-    <main id="main" class="container">
-      <section class="feature-list">
-        <article class="feature-card">
-          <i class="fa-solid fa-heart feature-card__icon"></i>
-          <h2 class="feature-card__title">Compassionate Care</h2>
-          <p>
-            Every cat is treated with love and the best possible care while
-            waiting for a new home.
-          </p>
-        </article>
-        <article class="feature-card">
-          <i class="fa-solid fa-paw feature-card__icon"></i>
-          <h2 class="feature-card__title">Adoption Support</h2>
-          <p>
-            We help you find the perfect match and provide guidance every step
-            of the way.
-          </p>
-        </article>
-        <article class="feature-card">
-          <i class="fa-solid fa-seedling feature-card__icon"></i>
-          <h2 class="feature-card__title">Community Outreach</h2>
-          <p>
-            Our mission goes beyond rescue — we educate and support responsible
-            pet ownership.
-          </p>
-        </article>
-      </section>
-
-      <p class="intro-text">
-        At Lola's Ark, we rescue, care for, and rehome cats of all ages, giving
-        every animal a second chance at a happy life. With the help of our
-        volunteers and supporters, we provide love, medical care, and
-        socialisation to prepare cats for their forever homes. Join us in
-        supporting our furry friends and building a kinder, more compassionate
-        community.
-      </p>
-
-      <section id="meet-our-cats-bookmark" class="cat-gallery">
-        <h2 class="cat-gallery__header">Meet Our Cats</h2>
-        <div class="cat-gallery__filter">
-          <button class="filter-btn" data-filter="kitten">Kitten</button>
-          <button class="filter-btn" data-filter="adult">Adult</button>
-          <button class="filter-btn" data-filter="senior">Senior</button>
-          <button class="filter-btn" data-filter="all">All</button>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <div class="hero-pattern"></div>
+            <div class="hero-overlay"></div>
         </div>
-        <div class="cat-gallery__list"></div>
-        <template id="cat-gallery__card-template">
-          <div class="cat-gallery__card">
-            <div class="cat-gallery__card-image">
-              <img src="" alt="Rescue cat" loading="lazy" />
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="hero-badge">
+                        <i class="fas fa-heart"></i>
+                        <span>Charity Organisation</span>
+                    </div>
+                    <h1>Find Your Purrfect Companion</h1>
+                    <p>Looking for a furry friend? We've got amazing cats waiting for their forever homes. Every adoption makes a huge difference - not just for the cat, but for you too!</p>
+                    <div class="hero-buttons">
+                        <a href="#cats" class="cta-button primary">Meet Our Cats</a>
+                        <a href="#about" class="cta-button secondary">Learn More</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">Cats Rescued</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="stat-number">3+</span>
+                            <span class="stat-label">Years of Service</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Love & Care</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-cats">
+                        <div class="cat-1">🐱</div>
+                        <div class="cat-2">🐈</div>
+                        <div class="cat-3">🐈‍⬛</div>
+                    </div>
+                    <div class="hero-shapes">
+                        <div class="shape shape-1"></div>
+                        <div class="shape shape-2"></div>
+                        <div class="shape shape-3"></div>
+                    </div>
+                </div>
             </div>
-            <div class="cat-gallery__card-text">
-              <h3 class="cat-gallery__title"></h3>
-              <p class="cat-gallery__description"></p>
-              <p class="cat-gallery__age"></p>
-            </div>
-          </div>
-        </template>
-      </section>
-    </main>
+        </div>
+    </section>
 
-    <footer class="site-footer">
-      <p>&copy; 2025 Lola's Ark. All rights reserved.</p>
+    <!-- About Us Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>About Lola's Ark</h2>
+                    <p>Hey there! We're Lola's Ark, and we're pretty passionate about helping cats find their people. We started this back in 2020 and honestly, it's been amazing - we've helped over 500 cats find their forever homes! Whether they're tiny kittens or wise seniors, every cat here has a story and deserves a chance at a happy life.</p>
+                    <a href="#" class="about-cta-btn" id="aboutCtaBtn">Donate</a>
+                </div>
+                <div class="about-image">
+                    <div class="about-cat">🐱</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cats Section -->
+    <section id="cats" class="cats-section">
+        <div class="container">
+            <h2>Available for Adoption</h2>
+            <div class="cat-filters">
+                <button class="filter-btn active" data-filter="all">All Cats</button>
+                <button class="filter-btn" data-filter="male">Male</button>
+                <button class="filter-btn" data-filter="female">Female</button>
+                <button class="filter-btn" data-filter="kitten">Kitten</button>
+                <button class="filter-btn" data-filter="adult">Adult</button>
+                <button class="filter-btn" data-filter="senior">Senior</button>
+            </div>
+            <div class="filter-info">
+                <span id="catCount">Showing all cats</span>
+                <button class="clear-filters" id="clearFilters" style="display: none;">Clear Filters</button>
+            </div>
+            <div class="cats-grid" id="catsGrid">
+                <div class="loading">Loading cats...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2>Get in Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Address</h4>
+                            <p>123 Cat Street, Meow City, MC 12345</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>(555) 123-4567</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>hello@lolasark.org</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h4>Hours</h4>
+                            <p>Mon-Fri: 9AM-6PM<br>Sat-Sun: 10AM-4PM</p>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form" id="contactForm">
+                    <h3>Drop Us a Line</h3>
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                        <div class="form-validation" id="nameValidation">Please enter your name</div>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        <div class="form-validation" id="emailValidation">Please enter a valid email</div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                        <div class="form-validation" id="subjectValidation">Please enter a subject</div>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
+                        <div class="form-validation" id="messageValidation">Please enter a message</div>
+                    </div>
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <div class="loading-spinner"></div>
+                        <span>Send Message</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Lola's Ark</h3>
+                    <p>We're here to help cats find their people, one adoption at a time.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#cats">Adopt a Cat</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Adoption Process</h4>
+                    <ul>
+                        <li>Meet & Greet</li>
+                        <li>Application Review</li>
+                        <li>Home Visit</li>
+                        <li>Adoption Day</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Lola's Ark. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
-
-    <script src="./js/main.js"></script>
-  </body>
+    <script src="./script.js"></script>
+</body>
 </html>
