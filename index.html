@@ -186,6 +186,175 @@
         </div>
     </section>
 
+      <!-- Adoption Modal -->
+      <div id="adoptionModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Adopt [Cat Name]</h2>
+                <span class="modal-close" id="modalClose">&times;</span>
+            </div>
+            <form class="adoption-form" id="adoptionForm">
+                <input type="hidden" id="selectedCat" name="selectedCat" value="">
+                <div class="form-section">
+                    <h3>Personal Information</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fullName">Full Name *</label>
+                            <input type="text" id="fullName" name="fullName" required>
+                            <div class="form-validation" id="fullNameValidation"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="dob">Date of Birth *</label>
+                            <input type="date" id="dob" name="dob" required>
+                            <div class="form-validation" id="dobValidation"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="addressLine1">Address Line 1 *</label>
+                        <input type="text" id="addressLine1" name="addressLine1" placeholder="House number and street name" required>
+                        <div class="form-validation" id="addressLine1Validation"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="addressLine2">Address Line 2</label>
+                        <input type="text" id="addressLine2" name="addressLine2" placeholder="Apartment, suite, etc. (optional)">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="city">City/Town *</label>
+                            <input type="text" id="city" name="city" required>
+                            <div class="form-validation" id="cityValidation"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="county">County</label>
+                            <input type="text" id="county" name="county">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="postcode">Postcode *</label>
+                        <input type="text" id="postcode" name="postcode" placeholder="e.g. M1 1AA" required>
+                        <div class="form-validation" id="postcodeValidation"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactNumber">Preferred Contact Number *</label>
+                        <input type="tel" id="contactNumber" name="contactNumber" placeholder="e.g. 07123 456789" required>
+                        <div class="form-validation" id="contactNumberValidation"></div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Living Situation</h3>
+                    <div class="form-group">
+                        <label for="livingArrangement">I/We live in a *</label>
+                        <select id="livingArrangement" name="livingArrangement" required>
+                            <option value="">Please select...</option>
+                            <option value="single-home">Single home</option>
+                            <option value="living-with-children">Living with children</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <div class="form-validation" id="livingArrangementValidation"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="fencedYard">Do you have a fenced yard? *</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="fencedYard" value="yes" required>
+                                <span class="radio-custom"></span>
+                                Yes
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="fencedYard" value="no" required>
+                                <span class="radio-custom"></span>
+                                No
+                            </label>
+                        </div>
+                        <div class="form-validation" id="fencedYardValidation"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="otherPets">Do you have any other pets? *</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="otherPets" value="yes" required>
+                                <span class="radio-custom"></span>
+                                Yes
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="otherPets" value="no" required>
+                                <span class="radio-custom"></span>
+                                No
+                            </label>
+                        </div>
+                        <div class="form-validation" id="otherPetsValidation"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="petConfinement">Where does your pet stay (confined) while you are out? *</label>
+                        <textarea id="petConfinement" name="petConfinement" rows="3" placeholder="Please describe where your pet will stay when you're not home..." required></textarea>
+                        <div class="form-validation" id="petConfinementValidation"></div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Background & Care Information</h3>
+                    <div class="form-group">
+                        <label for="animalOffences">Has anyone in your household ever been banned from owning animals or prosecuted for animal-related offences? *</label>
+                        <textarea id="animalOffences" name="animalOffences" rows="3" placeholder="Please answer honestly. If yes, please describe the circumstances..." required></textarea>
+                        <div class="form-validation" id="animalOffencesValidation"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="regularVet">Do you have a regular vet? *</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="regularVet" value="yes" required>
+                                <span class="radio-custom"></span>
+                                Yes
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="regularVet" value="no" required>
+                                <span class="radio-custom"></span>
+                                No
+                            </label>
+                        </div>
+                        <div class="form-validation" id="regularVetValidation"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="timeAlone">On average, how long would your pet(s) spend alone? *</label>
+                        <select id="timeAlone" name="timeAlone" required>
+                            <option value="">Please select...</option>
+                            <option value="1-2-hours">1-2 hours</option>
+                            <option value="3-4-hours">3-4 hours</option>
+                            <option value="5-6-hours">5-6 hours</option>
+                            <option value="7-8-hours">7-8 hours</option>
+                            <option value="more-than-8-hours">More than 8 hours</option>
+                        </select>
+                        <div class="form-validation" id="timeAloneValidation"></div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Confirmation</h3>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="confirmAccuracy" name="confirmAccuracy" required>
+                            <span class="checkbox-custom"></span>
+                            I confirm that all information provided is accurate and complete *
+                        </label>
+                        <div class="form-validation" id="confirmAccuracyValidation"></div>
+                    </div>
+                    <div class="form-disclaimer">
+                        <p><strong>Important:</strong> Any false information provided in this application could lead to a void adoption. We reserve the right to verify all information and conduct home visits as part of our adoption process.</p>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="modal-btn secondary" id="cancelAdoption">Cancel</button>
+                    <button type="submit" class="modal-btn primary" id="submitAdoption">
+                        <div class="loading-spinner"></div>
+                        <span>Submit Application</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">

@@ -222,14 +222,10 @@ function setupFilterButtons () {
 }
 
 // Function to handle adoption
-function adoptCat (catName) {
-  // Find the section you want to scroll to
-  const section = document.getElementById('contact')
-
-  if (section) {
-    section.scrollIntoView({ behavior: 'smooth' })
-  }
+function adoptCat(catName) {
+  openAdoptionModal(catName);
 }
+
 
 // Mobile Nav Toggle
 function setupMobileNavigation () {
@@ -367,4 +363,192 @@ document.addEventListener('DOMContentLoaded', () => {
   setupSmoothScrolling()
   setupContactForm()
   setupAboutButton()
+  setupAdoptionForm()
 })
+
+
+// ===== Adoption Modal Logic =====
+let currentCat = null;
+
+function openAdoptionModal(catName) {
+  currentCat = catName;
+  const modal = document.getElementById('adoptionModal');
+  const title = document.getElementById('modalTitle');
+  const hiddenCat = document.getElementById('selectedCat');
+  const dobInput = document.getElementById('dob');
+
+  if (title) title.textContent = `Adopt ${catName}`;
+  if (hiddenCat) hiddenCat.value = catName;
+
+  // Clamp DOB so it can't be a future date
+  if (dobInput) {
+    const today = new Date().toISOString().split('T')[0];
+    dobInput.setAttribute('max', today);
+  }
+
+  if (modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeAdoptionModal() {
+  const modal = document.getElementById('adoptionModal');
+  const form = document.getElementById('adoptionForm');
+  if (modal) modal.classList.remove('active');
+  document.body.style.overflow = '';
+  // optional: reset form on close
+  if (form) form.reset();
+}
+
+// Replace the old adoptCat behavior to open the modal
+function adoptCat(catName) {
+  openAdoptionModal(catName);
+}
+
+// Set up listeners & validation for the adoption form
+function setupAdoptionForm() {
+  const modal = document.getElementById('adoptionModal');
+  const form = document.getElementById('adoptionForm');
+  const closeBtn = document.getElementById('modalClose');
+  const cancelBtn = document.getElementById('cancelAdoption');
+  const submitBtn = document.getElementById('submitAdoption');
+
+  if (!modal || !form) return;
+
+  // Close actions
+  if (closeBtn) closeBtn.addEventListener('click', closeAdoptionModal);
+  if (cancelBtn) cancelBtn.addEventListener('click', closeAdoptionModal);
+  // Close on outside click
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeAdoptionModal();
+  });
+  // ESC to close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) closeAdoptionModal();
+  });
+
+  // Real-time validation
+  const watchedFields = form.querySelectorAll('input, select, textarea');
+  watchedFields.forEach((el) => {
+    el.addEventListener('input', () => clearAdoptionValidation(el));
+    el.addEventListener('blur', () => validateAdoptionField(el));
+  });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Validate everything
+    let valid = true;
+    watchedFields.forEach((el) => {
+      if (!validateAdoptionField(el)) valid = false;
+    });
+
+    if (!valid) return;
+
+    // Submit (simulate)
+    if (submitBtn) {
+      submitBtn.classList.add('loading');
+      submitBtn.disabled = true;
+    }
+    await new Promise((r) => setTimeout(r, 1600));
+    if (submitBtn) {
+      submitBtn.classList.remove('loading');
+      submitBtn.disabled = false;
+    }
+
+    // You could send with fetch() here.
+    alert(`Thanks! Your application to adopt ${currentCat || 'this cat'} has been received. We'll be in touch soon.`);
+    closeAdoptionModal();
+  });
+}
+
+function showValidationMessage(el, msg) {
+  const id = el.getAttribute('id') || el.getAttribute('name');
+  const msgEl = id ? document.getElementById(id + 'Validation') : null;
+  if (msgEl) {
+    msgEl.textContent = msg || '';
+    msgEl.classList.toggle('show', Boolean(msg));
+  }
+}
+
+function clearAdoptionValidation(el) {
+  showValidationMessage(el, '');
+}
+
+function validateAdoptionField(el) {
+  const name = el.getAttribute('name');
+  const type = el.getAttribute('type');
+  const required = el.hasAttribute('required');
+  const value = (el.value || '').trim();
+
+  // Radios: validate group
+  if (type === 'radio') {
+    const group = document.querySelectorAll(`input[name="${name}"]`);
+    const anyChecked = Array.from(group).some((r) => r.checked);
+    if (!anyChecked && required) {
+      showValidationMessage(el, 'Please choose an option');
+      return false;
+    } else {
+      showValidationMessage(el, '');
+      return true;
+    }
+  }
+
+  // Checkbox confirm
+  if (type === 'checkbox') {
+    if (required && !el.checked) {
+      showValidationMessage(el, 'You must confirm this');
+      return false;
+    }
+    showValidationMessage(el, '');
+    return true;
+  }
+
+  // Selects
+  if (el.tagName.toLowerCase() === 'select') {
+    if (required && !value) {
+      showValidationMessage(el, 'Please select an option');
+      return false;
+    }
+    showValidationMessage(el, '');
+    return true;
+  }
+
+  // Text-like fields
+  if (required && !value) {
+    showValidationMessage(el, 'This field is required');
+    return false;
+  }
+
+  // Specific validations
+  if (name === 'postcode' && value) {
+    // UK postcode regex (covers most common formats, case-insensitive)
+    const re = /^(GIR\s?0AA|(?:(?:[A-PR-UWYZ][0-9]{1,2}|[A-PR-UWYZ][A-HK-Y][0-9]{1,2}|[A-PR-UWYZ][0-9][A-HJKSTUW]|[A-PR-UWYZ][A-HK-Y][0-9][ABEHMNPRVWXY]))\s?[0-9][ABD-HJLNP-UW-Z]{2})$/i;
+    if (!re.test(value)) {
+      showValidationMessage(el, 'Please enter a valid UK postcode');
+      return false;
+    }
+  }
+
+  if (name === 'contactNumber' && value) {
+    // Very permissive UK phone patterns (mobile/landline), allow spaces
+    const re = /^(?:0|\+?44)\s?(?:\d\s?){9,10}$/;
+    if (!re.test(value.replace(/[()-]/g, ''))) {
+      showValidationMessage(el, 'Please enter a valid UK phone number');
+      return false;
+    }
+  }
+
+  if (name === 'dob' && value) {
+    const d = new Date(value);
+    const now = new Date();
+    if (d > now) {
+      showValidationMessage(el, 'Date of birth cannot be in the future');
+      return false;
+    }
+  }
+
+  showValidationMessage(el, '');
+  return true;
+}
